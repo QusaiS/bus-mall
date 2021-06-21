@@ -15,6 +15,7 @@ let imgArray = [
   'water-can.jpg','wine-glass.jpg'];
 
 
+
 let imageSection = document.getElementById('imageSection');
 let leftImage = document.getElementById( 'leftImage' );
 let midImage = document.getElementById( 'midImage' );
@@ -24,7 +25,6 @@ let view = document.getElementById('show');
 
 let pImg = [];
 let counter = 0;
-let trys=25;
 let rightCounter = 0;
 let midCounter = 0;
 let leftCounter = 0;
@@ -86,6 +86,7 @@ function render() {
   Images.all[rightIndex].views++;
   Images.all[leftIndex].views++;
   Images.all[midIndex].views++;
+  drawChart ();
 
   console.log(Images.all);
 }
@@ -94,7 +95,7 @@ function render() {
 function eventHandler(e) {
   // console.log(e.target.id);
   if((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'midImage' )
-  && counter < trys){
+  && counter < 26){
     render();
     console.log(counter);
     if (e.target.id === 'rightImage') {
@@ -105,7 +106,7 @@ function eventHandler(e) {
       Images.all[midCounter].clicker++;
     }
 
-    if ( e.target.id === 'leftImage') { Images.all[leftCounter].clicker++;
+    if ( e.target.id === 'leftImage') { Images.all[leftCounter].clicker=Images.all[leftCounter].clicker+1;
     }
     counter++;
     render();
@@ -116,6 +117,7 @@ function eventHandler(e) {
 imageSection.addEventListener('click', eventHandler);
 
 render();
+
 
 
 function randomNumber( min, max ) {
@@ -134,3 +136,59 @@ view.addEventListener('click', function dataView() {
   }
   imageSection.addEventListener('click', eventHandler);
 });
+
+
+
+// function drawChart (){
+  
+//   let arrName=[];
+//   for(var i=0;i<imgArray.length;i++){
+//     // arrName[i].push(imgArray[i]);
+//     console.log(imgArray[i]);
+//   }
+
+function drawChart() {
+  document.getElementById('myChart').innerHTML = "";
+  document.getElementById('dChart').innerHTML ='<canvas id="myChart" width="350" height="99" ></canvas>';
+  let name = [];
+  let view = [];
+
+  for(let i = 0; i < Images.all.length; i++) {
+    name.push(Images.all[i].name);
+    view.push(Images.all[i].views);
+  }
+  let ctx = document.getElementById('myChart').getContext('2d');
+  let myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: name,
+      datasets: [{
+        label: '# of Votes',
+        data: view,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 10
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+drawChart ();
+
+
+console.log(drawChart)
