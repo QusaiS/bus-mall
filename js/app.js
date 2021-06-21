@@ -14,12 +14,6 @@ let imgArray = [
   'unicorn.jpg','usb.gif',
   'water-can.jpg','wine-glass.jpg'];
 
-// Constructor
-// New obj
-// prototype render
-// Random function
-// get by id
-// Event Handler
 
 let imageSection = document.getElementById('imageSection');
 let leftImage = document.getElementById( 'leftImage' );
@@ -28,6 +22,7 @@ let rightImage = document.getElementById( 'rightImage' );
 let list = document.getElementById('ord');
 let view = document.getElementById('show');
 
+let pImg = [];
 let counter = 0;
 let trys=25;
 let rightCounter = 0;
@@ -48,17 +43,35 @@ for( let i = 0; i < imgArray.length; i++ ) {
   new Images( imgArray[i].split( '.' )[0], imgArray[i] );
 }
 
+pImg [0] = -1 ;
+  pImg [1] = -1;
+  pImg [2] = -1 ;
+
+
 function render() {
-  let leftIndex = randomNumber(0, imgArray.length - 1);
+  console.log(JSON.stringify(pImg));
+  let leftIndex ;
   let midIndex;
   let rightIndex;
+  do{
+    leftIndex = randomNumber(0, imgArray.length - 1);
+  }while ( pImg.includes(leftIndex , 0 ) )
+ 
   do {
     rightIndex = randomNumber(0, imgArray.length - 1);
-  } while( leftIndex === rightIndex || midIndex === rightIndex );
+  
+  } while( leftIndex === rightIndex ||   pImg.includes(rightIndex , 0 ) );
 
   do {
     midIndex = randomNumber(0, imgArray.length - 1);
-  } while( leftIndex === midIndex || midIndex === rightIndex );
+  
+  } while( leftIndex === midIndex || midIndex === rightIndex  ||  pImg.includes(midIndex , 0 ));
+
+  pImg [0] = leftIndex ;
+  pImg [1] = rightIndex;
+  pImg [2] = midIndex ;
+
+  // console.log(JSON.stringify(pImg));
 
   rightImage.src = Images.all[rightIndex].src;
   leftImage.src = Images.all[leftIndex].src;
@@ -71,6 +84,7 @@ function render() {
   console.log(Images.all);
 }
 
+
 function eventHandler(e) {
   // console.log(e.target.id);
   if((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'midImage' ) && counter < 10){
@@ -80,7 +94,7 @@ function eventHandler(e) {
       Images.all[rightCounter].clicker++;
     }
 
-    else if (e.target.id === 'centerImage') {
+    else if (e.target.id === 'midImage') {
       Images.all[midCounter].clicker++;
     }
 
@@ -97,13 +111,7 @@ imageSection.addEventListener('click', eventHandler);
 
 render();
 
-// console.log(Images.all);
-// leftImage.setAttribute('src', Images.all[0].src)
-// let index = randomNumber(0, imgArray.length - 1);
-// rightImage.src = Images.all[index].src;
-// console.log( leftImage, rightImage );
 
-// Helper function
 function randomNumber( min, max ) {
   min = Math.ceil( min );
   max = Math.floor( max );
@@ -111,10 +119,12 @@ function randomNumber( min, max ) {
 }
 
 view.addEventListener('click', function dataView() {
+  document.getElementById('ord').innerHTML='';
   for (let i = 0; i < imgArray.length; i++) {
     let item = document.createElement('li');
     ord.appendChild(item);
     item.textContent = `${Images.all[i].name.split('.')[0]} had ${Images.all[i].clicker} votes, and was seen ${Images.all[i].views} times.`;
     imageSection.removeEventListener('click',eventHandler);
   }
+  imageSection.addEventListener('click', eventHandler);
 });
