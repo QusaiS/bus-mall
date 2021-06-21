@@ -33,6 +33,7 @@ function Images( name, src ) {
   this.name = name;
   this.src = `./img/${src}`;
   this.views = 0;
+  this.clicker = 0;
   Images.all.push(this);
 }
 
@@ -44,8 +45,13 @@ for( let i = 0; i < imgArray.length; i++ ) {
 }
 
 pImg [0] = -1 ;
-  pImg [1] = -1;
-  pImg [2] = -1 ;
+pImg [1] = -1;
+pImg [2] = -1 ;
+
+
+
+
+
 
 
 function render() {
@@ -55,17 +61,17 @@ function render() {
   let rightIndex;
   do{
     leftIndex = randomNumber(0, imgArray.length - 1);
-  }while ( pImg.includes(leftIndex , 0 ) )
- 
+  }while ( pImg.includes(leftIndex , 0 ) );
+
   do {
     rightIndex = randomNumber(0, imgArray.length - 1);
-  
-  } while( leftIndex === rightIndex ||   pImg.includes(rightIndex , 0 ) );
+
+  } while( leftIndex === rightIndex || pImg.includes(rightIndex , 0 ) );
 
   do {
     midIndex = randomNumber(0, imgArray.length - 1);
-  
-  } while( leftIndex === midIndex || midIndex === rightIndex  ||  pImg.includes(midIndex , 0 ));
+
+  } while( leftIndex === midIndex || midIndex === rightIndex || pImg.includes(midIndex , 0 ));
 
   pImg [0] = leftIndex ;
   pImg [1] = rightIndex;
@@ -87,19 +93,19 @@ function render() {
 
 function eventHandler(e) {
   // console.log(e.target.id);
-  if((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'midImage' ) && counter < 10){
+  if((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'midImage' )
+  && counter < trys){
     render();
     console.log(counter);
     if (e.target.id === 'rightImage') {
       Images.all[rightCounter].clicker++;
     }
 
-    else if (e.target.id === 'midImage') {
+    if (e.target.id === 'midImage') {
       Images.all[midCounter].clicker++;
     }
 
-    else {
-      Images.all[leftCounter].clicker++;
+    if ( e.target.id === 'leftImage') { Images.all[leftCounter].clicker++;
     }
     counter++;
     render();
@@ -122,7 +128,7 @@ view.addEventListener('click', function dataView() {
   document.getElementById('ord').innerHTML='';
   for (let i = 0; i < imgArray.length; i++) {
     let item = document.createElement('li');
-    ord.appendChild(item);
+    list.appendChild(item);
     item.textContent = `${Images.all[i].name.split('.')[0]} had ${Images.all[i].clicker} votes, and was seen ${Images.all[i].views} times.`;
     imageSection.removeEventListener('click',eventHandler);
   }
