@@ -94,7 +94,7 @@ function render() {
 function eventHandler(e) {
   // console.log(e.target.id);
   if((e.target.id === 'rightImage' || e.target.id === 'leftImage' || e.target.id === 'midImage' )
-  && counter < trys){
+    && counter < trys){
     render();
     console.log(counter);
     if (e.target.id === 'rightImage') {
