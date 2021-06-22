@@ -3,66 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buss-Mall</title>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Bus-Mall</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
+    <header>
 
-    <head>
-        <div style="padding-left: 20px;padding-top: 8px;
-        align-items: center;display: flex;">
-            <img src="https://th.bing.com/th/id/OIP.Vgosfdahg4dG3jz43zQbXwHaF7?w=202&h=180&c=7&o=5&dpr=1.25&pid=1.7">
-            &nbsp;
-            <h1 style="font-weight: bolder; 
-     font-size: 45px;">Buss - Mall</h1>
-        </div>
-    </head>
-    <hr>
-    <hr>
-    
+        <ul>
+            <li><img src="img/1.png" alt="1"></li>
+            <li>
+                <h1>Bus-Mall</h1>
+            </li>
+        </ul>
+    </header>
     <main>
-        <section class="section1">
+        <section id="all_Pro">
+            <div id="list">
+                <h1>Results</h1>
+            </div>
+            <div>
+                <ul>
+                    <li id="pro1"><img id="pro1img" src="" alt=""></li>
+                    <li id="pro2"><img id="pro2img" src="" alt=""></li>
+                    <li id="pro3"><img id="pro3img" src="" alt=""></li>
 
-
-            <section class="image-section" id="imageSection">
-                <img src="" alt="img1" id="leftImage">
-                <img src="" alt="img2" id="midImage">
-                <img src="" alt="img3" id="rightImage">
-            </section>
-
-           
-            <br>
-            <center>
-                <div style="clear: both;"></div>
-                <!-- <section class="ordsection" id="ordSection"> -->
-                <button id="show" style="text-align: left; width: 80px; float: left; font-weight: bolder;">View
-                    Results</button>
-                <br>
-                <br>
-                <ul id="ord" style="text-align: left; justify-content: left;"></ul>
-            </center>
-            <div style="clear: both;"></div>
-            <div class="container" id="dChart" style="text-align: left;">
-                <canvas id="myChart" width="250" height="100"></canvas>
+                </ul>
 
             </div>
-
-            <!-- </section> -->
+        </section>
+        <div id="barchart">
+            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+        </div>
 
     </main>
-    <hr>
     <footer>
-        <center>
-        <h3 style="font-weight: bolder; text-align: center; justify-content: center; align-items: center;">
-        All Right Reserved &copy; 2021</h3>
-    </center>
+
+        <p>@copy right Bus-Mall style</p>
+
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
-    <script src="./js/app.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> -->
+
+    <script src="js/app.js"></script>
 </body>
 
 </html>
